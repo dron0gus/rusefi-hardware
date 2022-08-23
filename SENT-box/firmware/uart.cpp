@@ -67,7 +67,8 @@ static void UartThread(void*)
                 SENT_GetShortIntervalErrCnt(), SENT_GetLongIntervalErrCnt(), SENT_GetSyncErrCnt(), SENT_GetCrcErrCnt(),
                 SENT_GetFrameCnt(0)
                 );
-            #else
+            #endif
+            #if 0
             uint32_t gm_pressure = gm_GetPressure(0);
             writeCount += chsnprintf(printBuffer + writeCount, BUFFER_SIZE - writeCount,
                 " GM: St %x, Sig0 %04d, Sig1 %04d, %d.%03d Atm Tick = %04d nS.\r\n",
@@ -98,6 +99,15 @@ static void UartThread(void*)
                     }
                 }
             }
+            #endif
+            writeCount += chsnprintf(printBuffer + writeCount, BUFFER_SIZE - writeCount,
+                " Throt: %d%% (%d) : %d%% (%d), sum = %d (%d)\r\n",
+                gm_GetSig0(0) * 100 / (1 << 12), gm_GetSig0(0),
+                gm_GetSig1(0) * 100 / (1 << 12), gm_GetSig1(0),
+                (gm_GetSig0(0) + gm_GetSig1(0)) * 100 / (1 << 12), gm_GetSig0(0) + gm_GetSig1(0)
+                );
+            #if 1
+
             #endif
         }
         else

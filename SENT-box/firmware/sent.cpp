@@ -64,7 +64,8 @@ uint8_t sent_crc4_gm(uint8_t* pdata, uint16_t ndata);
 static int SENT_SlowChannelDecoder(struct sent_channel *ch);
 
 //#define SENT_TICK (5 * 72) // 5uS @72MHz
-#define SENT_TICK (27 * 72 / 10) // 2.7uS @72MHz
+//#define SENT_TICK (27 * 72 / 10) // 2.7uS @72MHz
+#define SENT_TICK (33 * 72 / 10) // 3.3uS @72MHz
 
 int SENT_Decoder(struct sent_channel *ch, uint16_t clocks)
 {
